@@ -76,4 +76,12 @@ Then load up Energy Trace and perform the similar capture of Power with the LED 
 
 
 # Screenshots and Answers to Questions
-**Replace this section with your screenshots of Energy Trace and provide some reasoning as to Questions 1 and 2 in the Power consumption of the Interrupts Section.**
+Part 1: Polling
+![part3_1](https://user-images.githubusercontent.com/92492005/216461047-7244976e-ddc2-4e15-a1de-b6a41866d2c5.png)
+
+Part 2: Interrupts
+![part3_2](https://user-images.githubusercontent.com/92492005/216461179-298f52ea-6294-4c87-a638-cf445643e82f.png)
+
+
+Q1: The cpu has to keep checking if the button is pushed or not, which uses power. The interrupt allows the cpu to do nothing until it is alerted the button has been pressed
+Q2: With the pull-up resistor, there is a power source that connects the button across the resistor to ground. So even though the led isn't connected to the button, the power source is which causes a spike in power usage.
