@@ -29,6 +29,9 @@ int main(void)
 
     // @TODO You need to add in the configuration for the Green LED
 
+    P6OUT &= ~BIT6;                         //Init Green LED
+    P6DIR |= BIT6;                          //Set green led to output
+
     P2OUT |= BIT3;                          // Configure P2.3 as pulled-up
     P2REN |= BIT3;                          // P2.3 pull-up register enable
     P2IES &= ~BIT3;                         // P2.3 Low --> High edge
@@ -42,14 +45,26 @@ int main(void)
 
     __bis_SR_register(GIE);                 // Enter LPM3 w/interrupt
 
-    while(1)
+    while(1)                                // Infinite loop to run forever
     {
-        // @TODO You will need to modify this code to change between blinking the Red LED or the Green LED
-        if (ToggleEnable)
-            P1OUT ^= BIT0;                  // P1.0 = toggle
-        else
-            P1OUT &= ~BIT0;                 // Set P1.0 to 0
-        __delay_cycles(100000);
+
+        if (ToggleEnable){                  // Check for interrupt from button
+            P6OUT &= ~BIT6;                 //Turn green led off
+            while (ToggleEnable) {         // Checks if interrupt is still on
+            P1OUT ^= BIT0;                  // Toggle red led
+
+            __delay_cycles(100000);         // Blinks every 0.1s
+            }
+        }
+        else{                               // Checks if no interrupt
+            P1OUT &= ~BIT1;                 // Turns off red led
+                        while (!ToggleEnable) { //Runs while no interrupt
+                        P6OUT ^= BIT6;            //Toggles green led
+
+                        __delay_cycles(100000);     //Blinks every 0.1s
+                        }
+        }
+
     }
 }
 
