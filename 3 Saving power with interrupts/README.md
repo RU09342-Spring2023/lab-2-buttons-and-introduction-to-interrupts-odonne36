@@ -84,4 +84,5 @@ Part 2: Interrupts
 
 
 Q1: The cpu has to keep checking if the button is pushed or not, which uses power. The interrupt allows the cpu to do nothing until it is alerted the button has been pressed
+
 Q2: With the pull-up resistor, there is a power source that connects the button across the resistor to ground. So even though the led isn't connected to the button, the power source is which causes a spike in power usage.
