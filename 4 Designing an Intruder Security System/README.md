@@ -1,12 +1,19 @@
-# Lab Exercise 2: Interrupts and Energy Trace
-The purpose of this lab is to explore the input functionality of the Microprocessor and begin looking at interrupts. You will also be looking into a very power tool within Code Composer: Energy Trace, which allows you to see power consumption of your processor and design. You will then interface a PIR sensor to your board to be able to do occupancy detection. Finally, you will design an intruder alarm system, which will notify a user that the system is armed, indicated when a person is detected, and then finally set an "alarm" when they stay too long.
+## Intro
 
-## Assignment
-Each of the following bullet items are in their own numeric folder and meant to go in order.
+The code in the occupancy detector file is a program that acts as an alarm system for a room. 
 
-To complete this assignment, you will need to:
-- [ ] 1. Investigate the Buttons on the Launchpad and configure Pullup/Pulldown Resistors for them to work correctly.
-- [ ] 2. Learn about the Interrupt Routine and how it interfaces with your software.
-- [ ] 3. Use Interrupts to implement the alternative blinking LED example from Lab 1
-- [ ] 4. Explore how interrupts can be used to save power versus polling.
-- [ ] 5. Design the Intruder Security System
+## Armed State
+
+The system starts out in an armed state that is indicated by a green LED blinking every second. If there is a person in the room
+(indicated by a button press), the system now moves into the next state.
+
+## Alert State
+
+If the system detects a person (button press) then it will go into the alert state. This is indicated by the red led blinking and the green led
+turned off. There are two ways to get out of this state: if the system determines that after 10 seconds there is still a person in the room (button still held down)
+the system goes into the alarm state. If the system doesn't detect a person after the 10 seconds, it resets everything and goes back to the armed state.
+
+## Alarm State
+
+If the alarm is triggered, then the red led is constantly on and the original button will no longer work. The only way to get out of
+this state is to press the other button which resets the system and goes back to the armed state.
